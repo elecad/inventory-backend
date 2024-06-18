@@ -8,7 +8,8 @@
     "strictPropertyInitialization": false,
     "strict": true,
     "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
     "outDir": "./build",
-    "rootDir": "./src"
-  },
+    "rootDir": "./src",
+  }
 }
