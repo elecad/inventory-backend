@@ -2,7 +2,7 @@ import {AppDataSource} from "../../data-source";
 import {User} from "./user.models";
 import {FindOneOptions} from "typeorm/find-options/FindOneOptions";
 import {FindManyOptions} from "typeorm";
-import {HttpError} from "../../middleware/errorMiddleware";
+import {HttpError} from "../../middlewares/middleware/errorMiddleware";
 
 class UserService {
     static async get(option: FindOneOptions) {

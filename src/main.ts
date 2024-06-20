@@ -3,7 +3,7 @@ import {configDotenv} from "dotenv";
 import router from "./router";
 import "reflect-metadata"
 import {AppDataSource} from "./data-source";
-import {HttpError} from "./middleware/errorMiddleware";
+import {HttpError} from "./middlewares/middleware/errorMiddleware";
 
 configDotenv();
 
@@ -14,7 +14,7 @@ app.use('/api', router);
 
 app.use((err: HttpError, req: Request, res: Response, next: NextFunction) => {
     const {code, message} = err
-    res.status(code).json({message})
+    res.status(code | 500).json({message})
 })
 
 

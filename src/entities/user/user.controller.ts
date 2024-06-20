@@ -10,6 +10,7 @@ class UserController {
 
 
     static async get(req: Request, res: Response) {
+        console.log(123)
         const id = +req.params.id
         const result = await userService.getOrFail({where: {id}});
         res.json(result)
@@ -43,6 +44,7 @@ class UserController {
     }
 
     static async test(req: Request, res: Response) {
+        console.log(123)
         res.sendStatus(205)
     }
 

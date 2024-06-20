@@ -1,17 +1,21 @@
-import {Router} from "express";
+import {Request, Response, Router} from "express";
 import UserController from "./entities/user/user.controller";
-import {validateBodyMiddleware} from "./middleware/validateBodyMiddleware";
+import {validateBodyMiddleware} from "./middlewares/middleware/validateBodyMiddleware";
 import {UserDto} from "./entities/user/dto/user.dto";
-import {errorMiddleware} from "./middleware/errorMiddleware";
-import {validateParamsMiddleware} from "./middleware/validateParamsMiddleware";
-import {groupMiddleware} from "./middleware/groupMiddleware";
+import {errorMiddleware} from "./middlewares/middleware/errorMiddleware";
+import {validateParamsMiddleware} from "./middlewares/middleware/validateParamsMiddleware";
+import {Middleware1} from "./middlewares/Middleware";
+import {log} from "node:util";
 
 
 const router = Router()
-router.post('/user', validateBodyMiddleware(UserDto), errorMiddleware(UserController.create))
-router.get('/user/:id', validateParamsMiddleware('id'), errorMiddleware(UserController.get))
-router.put('/user/:id', validateParamsMiddleware('id'), errorMiddleware(UserController.update))
-router.put('/test/:id', groupMiddleware([validateParamsMiddleware('id'), validateBodyMiddleware(UserDto)]), errorMiddleware(UserController.test))
-router.delete('/user/:id', validateParamsMiddleware('id'), errorMiddleware(UserController.remove))
+router.post('/user', errorMiddleware(UserController.create))
+router.get('/user/:id', errorMiddleware(UserController.get))
+router.put('/user/:id', errorMiddleware(UserController.update))
+router.put('/test/:id', (req: Request, res: Response) => {
+    console.log(123)
+    res.status(200).send("123")
+})
+router.delete('/user/:id', errorMiddleware(UserController.remove))
 
 export default router
